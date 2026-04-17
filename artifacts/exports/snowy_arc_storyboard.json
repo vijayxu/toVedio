@@ -39,13 +39,13 @@
         "location": "林边荒废猎户小屋附近",
         "time_of_day": "dusk",
         "mood": "清冷、静谧",
-        "background_prompt": "腊月雪暮，江南山林小径积雪薄覆，枯枝残叶，雪光映照惨白，天色渐暗，电影感动漫风格"
+        "background_prompt": "腊月黄昏，江南山林小径积雪薄覆，枯枝残叶，天边橙红余晖映照雪地，天色渐暗"
       },
       "visual": {
         "shot_type": "establishing",
         "camera": "缓慢横移",
-        "prompt_zh": "远景纯风景：雪暮山林，薄雪覆盖枯树残枝，天色昏黄，远方隐约有废弃小屋轮廓，空旷寂寥，画面内没有任何人，没有人影，没有人的身影，纯环境空镜",
-        "negative_prompt": "people, person, human, figure, man, woman, character, silhouette, shadow of person, body, face, text, subtitle, watermark",
+        "prompt_zh": "远景纯风景：黄昏雪暮山林，薄雪覆盖枯树残枝，天边橙红余晖，远方隐约有废弃小屋轮廓，空旷寂寥，画面内没有任何人，没有人影，纯环境空镜",
+        "negative_prompt": "people, person, human, figure, man, woman, character, silhouette, shadow of person, body, face, night, moonlight, full moon, dark night, text, subtitle, watermark",
         "characters_on_screen": []
       },
       "bgm_note": "低沉箫声，悠远清冷，节奏缓慢",
@@ -65,13 +65,13 @@
         "location": "林边小径",
         "time_of_day": "dusk",
         "mood": "宁静、稍显吃力",
-        "background_prompt": "雪暮林径，月白衣裙的女子背影提着药篓，踩雪前行"
+        "background_prompt": "黄昏雪暮，天边尚有橙红余光，林径积雪，月白衣裙女子披着斗篷提药篓踩雪前行"
       },
       "visual": {
         "shot_type": "medium",
         "camera": "跟拍侧面",
-        "prompt_zh": "中景：温蘅，十九岁年轻女子，着月白袄裙（浅白色棉袄加裙），发间木簪，提竹药篓低头走在雪径上，斗篷拢紧，踩出浅浅雪印，画面中只有这一个人，周围无其他人",
-        "negative_prompt": "old man, elderly, man, male, aged face, gray hair, second person, extra person, text, subtitle, watermark, deformed hands",
+        "prompt_zh": "中景，黄昏暖光：温蘅，十九岁年轻女子，头戴木簪，身着月白袄裙，外披浅灰色斗篷，手提竹药篓低头走在积雪小径上，脚踩雪地发出咯吱声，天边橙红余晖洒在她身上，只有她一人，周围无其他人",
+        "negative_prompt": "night, moonlight, full moon, dark night sky, blue tone, stars, old man, elderly, man, male, second person, extra person, text, subtitle, watermark, deformed hands",
         "characters_on_screen": [
           "wen_heng"
         ]
@@ -85,37 +85,63 @@
       ]
     },
     {
-      "shot_id": "s03",
+      "shot_id": "s02b",
       "order": 2,
+      "duration_sec": 2,
+      "scene": {
+        "label": "雪地·血迹特写",
+        "location": "林边雪地",
+        "time_of_day": "dusk",
+        "mood": "惊疑、不安",
+        "background_prompt": "黄昏雪地，一道触目惊心的暗红血迹从画面近景向纵深延伸，消失在远处枯树根旁，四周雪白寂静"
+      },
+      "visual": {
+        "shot_type": "close_up",
+        "camera": "低角度俯拍缓慢推远",
+        "prompt_zh": "低角度特写：洁白雪地上一道暗红色血迹从画面近景向远处枯树根方向延伸，血迹清晰可辨，雪地纯白，天边黄昏余光映照，画面内无任何人物，纯雪地血迹环境镜头",
+        "negative_prompt": "people, person, human, figure, man, woman, character, silhouette, night, moonlight, full moon, dark, blue tone, text, subtitle, watermark",
+        "characters_on_screen": []
+      },
+      "bgm_note": "弦乐骤起低频，悬疑感渐强",
+      "lines": [
+        {
+          "kind": "sfx_note",
+          "text": "脚步骤停声，风声压低，环境骤然安静"
+        }
+      ]
+    },
+    {
+      "shot_id": "s03",
+      "order": 3,
       "duration_sec": 4,
       "scene": {
-        "label": "雪地·发现血迹",
+        "label": "雪地·发现伤者",
         "location": "枯树根旁雪地",
         "time_of_day": "dusk",
         "mood": "紧张、惊疑",
-        "background_prompt": "雪地中一道暗红拖痕，延伸至枯树根旁，玄衣男子半伏在地"
+        "background_prompt": "黄昏雪地，前景是停步的月白衣裙女子，远景枯树根旁躺着玄衣男子，中间连着一道血迹"
       },
       "visual": {
-        "shot_type": "medium",
-        "camera": "缓慢推近至肩部以上",
-        "prompt_zh": "中景：画面中只有两个人，左侧是温蘅（十九岁年轻女子，月白袄裙，木簪）脚步顿住，视线沿雪地暗红血迹望向右侧；右侧枯树根旁是沈照夜（二十四岁青年男子，玄色劲装）半伏雪地，肩背血污，昏迷状态。场景中只有这两人，没有第三个人",
-        "negative_prompt": "third person, extra person, crowd, bystander, old man, elderly, aged face, gray hair, text, subtitle, watermark, deformed hands, blurry",
+        "shot_type": "medium_long",
+        "camera": "固定机位，景深纵深构图",
+        "prompt_zh": "远中景，纵深构图，黄昏暖光：前景是温蘅（十九岁年轻女子，月白袄裙，浅灰斗篷，手提药篓）脚步骤停，侧身或四分之三背对镜头，低头望向远处；画面中景是一道暗红血迹向纵深延伸；远景枯树根旁隐约可见沈照夜（玄色劲装）倒地身影，轮廓模糊，距离较远。温蘅尚未走近，停在原地，这是发现的瞬间而非已经走到跟前",
+        "negative_prompt": "close up of two people, both characters near each other, characters same distance from camera, night, moonlight, full moon, dark blue sky, stars, third person, extra person, text, subtitle, watermark, deformed hands, blurry",
         "characters_on_screen": [
           "wen_heng",
           "shen_zhaoye"
         ]
       },
-      "bgm_note": "弦乐骤起，低频紧张，悬疑感",
+      "bgm_note": "弦乐低频紧张持续",
       "lines": [
         {
           "kind": "sfx_note",
-          "text": "脚步骤停，衣袍在寒风中轻微摆动"
+          "text": "衣袍在寒风中轻微摆动，远处隐约有沉重的呼吸声"
         }
       ]
     },
     {
       "shot_id": "s04",
-      "order": 3,
+      "order": 4,
       "duration_sec": 6,
       "scene": {
         "label": "枯树旁·初见对峙",
@@ -128,7 +154,7 @@
         "shot_type": "medium_close_up",
         "camera": "固定机位双人同框",
         "prompt_zh": "中近景双人同框：沈照夜（二十四岁青年男子，玄色劲装，右肩血迹）倚靠枯树根坐于雪地，温蘅（十九岁年轻女子，月白袄裙，木簪）蹲在他旁边与他视线同高对望，两人相距约一臂，在画幅内人物高度相近、比例一致，没有一大一小的透视差。只有这两人，没有第三人",
-        "negative_prompt": "size difference, disproportionate characters, one person larger than other, perspective distortion, third person, extra person, old man, elderly, aged, gray hair, crowd, text, subtitle, watermark, deformed hands",
+        "negative_prompt": "size difference, disproportionate characters, one person larger than other, perspective distortion, third person, extra person, old man, elderly, aged, gray hair, crowd, night, moonlight, full moon, text, subtitle, watermark, deformed hands",
         "characters_on_screen": [
           "shen_zhaoye",
           "wen_heng"
@@ -152,20 +178,20 @@
     },
     {
       "shot_id": "s05",
-      "order": 4,
+      "order": 5,
       "duration_sec": 6,
       "scene": {
         "label": "雪地·伸手相扶",
         "location": "枯树根旁雪地",
         "time_of_day": "dusk",
         "mood": "温和、坚定",
-        "background_prompt": "雪地中女子向受伤男子伸出手，两人视线交汇"
+        "background_prompt": "黄昏雪地，温暖橙光余晖，女子向受伤男子伸出手，两人视线交汇"
       },
       "visual": {
         "shot_type": "over_shoulder",
         "camera": "侧后跟拍",
-        "prompt_zh": "过肩中景，画面中只有两人：温蘅（十九岁年轻女子，月白袄裙）蹲身向沈照夜（二十四岁青年男子，玄色劲装，伤者）伸出手，月白衣袖在雪光中温润；沈照夜虚虚搭上她手腕，两人目光短暂交汇，表情从戒备到接受。只有这两人，没有第三个人",
-        "negative_prompt": "third person, extra person, old man, elderly, text, subtitle, watermark, deformed hands",
+        "prompt_zh": "过肩中景，黄昏暖光：温蘅（十九岁年轻女子，月白袄裙）蹲身向沈照夜（二十四岁青年男子，玄色劲装，伤者）伸出手，月白衣袖在黄昏雪光中温润，沈照夜虚虚搭上她手腕，两人目光短暂交汇，表情从戒备到接受，只有这两人，没有第三个人",
+        "negative_prompt": "neon light, teal light, cyan glow, green light, cyberpunk, glowing background, night, moonlight, full moon, third person, extra person, old man, elderly, text, subtitle, watermark, deformed hands",
         "characters_on_screen": [
           "wen_heng",
           "shen_zhaoye"
@@ -189,20 +215,20 @@
     },
     {
       "shot_id": "s06",
-      "order": 5,
+      "order": 6,
       "duration_sec": 6,
       "scene": {
         "label": "雪径·艰难归途",
         "location": "林间雪径至小屋",
         "time_of_day": "dusk",
         "mood": "艰辛、温暖",
-        "background_prompt": "雪深难行，月白与玄衣身影相依，玄衣人重量大半压在女子肩上，女子发顶绒雪，耳后薄红"
+        "background_prompt": "黄昏入夜之交，雪深难行，月白与玄衣身影相依，玄衣人重量大半压在女子肩上"
       },
       "visual": {
         "shot_type": "medium",
         "camera": "跟拍侧面全景",
         "prompt_zh": "中景：温蘅（十九岁年轻女子，月白袄裙）用肩膀架着沈照夜（二十四岁青年男子，玄色劲装，受伤）臂弯艰难前行，雪深及踝，药篓斜挂温蘅身侧，两人呼出白气，玄衣与月白在雪光中相依，风雪漫天。只有这两人，没有第三个人",
-        "negative_prompt": "third person, extra person, crowd, old man, elderly, text, subtitle, watermark, deformed hands, blurry",
+        "negative_prompt": "third person, extra person, crowd, old man, elderly, neon light, teal glow, text, subtitle, watermark, deformed hands, blurry",
         "characters_on_screen": [
           "wen_heng",
           "shen_zhaoye"
@@ -218,7 +244,7 @@
     },
     {
       "shot_id": "s07",
-      "order": 6,
+      "order": 7,
       "duration_sec": 6,
       "scene": {
         "label": "小屋·拔箭疗伤",
@@ -263,14 +289,14 @@
     },
     {
       "shot_id": "s08",
-      "order": 7,
+      "order": 8,
       "duration_sec": 5,
       "scene": {
         "label": "小屋·雪夜凝望",
         "location": "温蘅小屋窗边",
         "time_of_day": "night",
         "mood": "沉静、余韵",
-        "background_prompt": "中国古代木屋室内，古风木格窗棂（不是玻璃窗），窗外雪花纷落夜色漆黑，屋内蜡烛为唯一光源，暖黄烛光，无任何现代元素"
+        "background_prompt": "中国古代木屋室内，古风木格窗棂，窗外雪花纷落夜色漆黑，屋内蜡烛为唯一光源，暖黄烛光，无任何现代元素"
       },
       "visual": {
         "shot_type": "medium_close_up",
