@@ -1,0 +1,30 @@
+# 密钥与本地配置（勿提交）
+.env
+.env.local
+*.local.env
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# 过程产物（默认仓库 artifacts/；可用 TOVEDIO_ARTIFACT_DIR 改到别处）
+artifacts/tmp/
+artifacts/staging/
+# L2V 断点缓存（与成片同目录：{片名}.l2v_cache/）
+**/*.l2v_cache/
+
+# 输出与临时
+demo/out*.mp4
+demo/_test.png
+demo/out2.mp4
+
+# BMad 本地配置与输出（运行 bmad-init 会再生）
+_bmad/
+_bmad-output/
+
+# JetBrains
+.idea/

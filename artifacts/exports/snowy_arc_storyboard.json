@@ -1,0 +1,293 @@
+{
+  "schema_version": "1.0.0",
+  "meta": {
+    "title": "雪夜救人（节选）",
+    "language": "zh-CN",
+    "source": {
+      "novel_id": "demo-002",
+      "chapter": "开篇",
+      "excerpt_range": "腊月廿三雪夜至「希望这场雪下得久一点」"
+    },
+    "model": {
+      "provider": "minimax",
+      "model_name": "MiniMax-M2.7"
+    }
+  },
+  "characters": [
+    {
+      "id": "shen_zhaoye",
+      "name": "沈照夜",
+      "role": "protagonist",
+      "appearance": "二十四岁男子，剑眉如刃，眼尾微挑，瞳仁深黑，唇薄，神情锐利却能敛去锋芒，玄色窄袖劲装，腰束银丝绦，左腕内侧有旧疤，右肩血染黑了一片",
+      "voice_hint": "male_young_calm_husky"
+    },
+    {
+      "id": "wen_heng",
+      "name": "温蘅",
+      "role": "protagonist",
+      "appearance": "十九岁女子，眉目清淡，杏眼温润，唇色淡粉，半旧月白袄裙，袖口缝得细密，发间一根木簪，神情柔和却透着一股韧性",
+      "voice_hint": "female_young_gentle"
+    }
+  ],
+  "shots": [
+    {
+      "shot_id": "s01",
+      "order": 0,
+      "duration_sec": 3,
+      "scene": {
+        "label": "林边小径·雪暮",
+        "location": "林边荒废猎户小屋附近",
+        "time_of_day": "dusk",
+        "mood": "清冷、静谧",
+        "background_prompt": "腊月雪暮，江南山林小径积雪薄覆，枯枝残叶，雪光映照惨白，天色渐暗，电影感动漫风格"
+      },
+      "visual": {
+        "shot_type": "establishing",
+        "camera": "缓慢横移",
+        "prompt_zh": "远景纯风景：雪暮山林，薄雪覆盖枯树残枝，天色昏黄，远方隐约有废弃小屋轮廓，空旷寂寥，画面内没有任何人，没有人影，没有人的身影，纯环境空镜",
+        "negative_prompt": "people, person, human, figure, man, woman, character, silhouette, shadow of person, body, face, text, subtitle, watermark",
+        "characters_on_screen": []
+      },
+      "bgm_note": "低沉箫声，悠远清冷，节奏缓慢",
+      "lines": [
+        {
+          "kind": "sfx_note",
+          "text": "雪落无声，林间寒风细碎，远处偶有枯枝被雪压断的轻响"
+        }
+      ]
+    },
+    {
+      "shot_id": "s02",
+      "order": 1,
+      "duration_sec": 4,
+      "scene": {
+        "label": "雪径·提篓归家",
+        "location": "林边小径",
+        "time_of_day": "dusk",
+        "mood": "宁静、稍显吃力",
+        "background_prompt": "雪暮林径，月白衣裙的女子背影提着药篓，踩雪前行"
+      },
+      "visual": {
+        "shot_type": "medium",
+        "camera": "跟拍侧面",
+        "prompt_zh": "中景：温蘅，十九岁年轻女子，着月白袄裙（浅白色棉袄加裙），发间木簪，提竹药篓低头走在雪径上，斗篷拢紧，踩出浅浅雪印，画面中只有这一个人，周围无其他人",
+        "negative_prompt": "old man, elderly, man, male, aged face, gray hair, second person, extra person, text, subtitle, watermark, deformed hands",
+        "characters_on_screen": [
+          "wen_heng"
+        ]
+      },
+      "bgm_note": "箫声渐弱，环境音为主",
+      "lines": [
+        {
+          "kind": "sfx_note",
+          "text": "脚踩薄雪咯吱作响，药篓内药草轻微碰撞"
+        }
+      ]
+    },
+    {
+      "shot_id": "s03",
+      "order": 2,
+      "duration_sec": 4,
+      "scene": {
+        "label": "雪地·发现血迹",
+        "location": "枯树根旁雪地",
+        "time_of_day": "dusk",
+        "mood": "紧张、惊疑",
+        "background_prompt": "雪地中一道暗红拖痕，延伸至枯树根旁，玄衣男子半伏在地"
+      },
+      "visual": {
+        "shot_type": "medium",
+        "camera": "缓慢推近至肩部以上",
+        "prompt_zh": "中景：画面中只有两个人，左侧是温蘅（十九岁年轻女子，月白袄裙，木簪）脚步顿住，视线沿雪地暗红血迹望向右侧；右侧枯树根旁是沈照夜（二十四岁青年男子，玄色劲装）半伏雪地，肩背血污，昏迷状态。场景中只有这两人，没有第三个人",
+        "negative_prompt": "third person, extra person, crowd, bystander, old man, elderly, aged face, gray hair, text, subtitle, watermark, deformed hands, blurry",
+        "characters_on_screen": [
+          "wen_heng",
+          "shen_zhaoye"
+        ]
+      },
+      "bgm_note": "弦乐骤起，低频紧张，悬疑感",
+      "lines": [
+        {
+          "kind": "sfx_note",
+          "text": "脚步骤停，衣袍在寒风中轻微摆动"
+        }
+      ]
+    },
+    {
+      "shot_id": "s04",
+      "order": 3,
+      "duration_sec": 6,
+      "scene": {
+        "label": "枯树旁·初见对峙",
+        "location": "枯树根旁雪地",
+        "time_of_day": "dusk",
+        "mood": "试探、戒备",
+        "background_prompt": "雪地枯树旁，玄衣男子半倚，眼神锐利如刀，年轻女子蹲身相望"
+      },
+      "visual": {
+        "shot_type": "medium_close_up",
+        "camera": "对切正反打",
+        "prompt_zh": "中近景，画面中只有两个人：沈照夜（二十四岁青年男子，剑眉，玄色劲装，右肩血浸发黑）倚靠枯树，目光锐利，额角冷汗，撑着虚弱的笑；温蘅（十九岁年轻女子，月白袄裙，木簪，杏眼）蹲于雪地对视，药篓搁膝，眉间透出不忍。只有这两人，没有第三个人出现",
+        "negative_prompt": "third person, extra person, old man, elderly, aged, gray hair, crowd, text, subtitle, watermark, deformed hands",
+        "characters_on_screen": [
+          "shen_zhaoye",
+          "wen_heng"
+        ]
+      },
+      "bgm_note": "悬疑弦乐渐缓，添一丝温度",
+      "lines": [
+        {
+          "kind": "dialogue",
+          "speaker_id": "shen_zhaoye",
+          "text": "姑娘，若方便，烦请当没见过我。",
+          "source_anchor": "原文对白",
+          "emotion": "虚弱却克制",
+          "speech_rate": "缓慢"
+        },
+        {
+          "kind": "sfx_note",
+          "text": "风雪轻掠，玄衣人嗓音沙哑，透着力竭"
+        }
+      ]
+    },
+    {
+      "shot_id": "s05",
+      "order": 4,
+      "duration_sec": 6,
+      "scene": {
+        "label": "雪地·伸手相扶",
+        "location": "枯树根旁雪地",
+        "time_of_day": "dusk",
+        "mood": "温和、坚定",
+        "background_prompt": "雪地中女子向受伤男子伸出手，两人视线交汇"
+      },
+      "visual": {
+        "shot_type": "over_shoulder",
+        "camera": "侧后跟拍",
+        "prompt_zh": "过肩中景，画面中只有两人：温蘅（十九岁年轻女子，月白袄裙）蹲身向沈照夜（二十四岁青年男子，玄色劲装，伤者）伸出手，月白衣袖在雪光中温润；沈照夜虚虚搭上她手腕，两人目光短暂交汇，表情从戒备到接受。只有这两人，没有第三个人",
+        "negative_prompt": "third person, extra person, old man, elderly, text, subtitle, watermark, deformed hands",
+        "characters_on_screen": [
+          "wen_heng",
+          "shen_zhaoye"
+        ]
+      },
+      "bgm_note": "弦乐温转，钢琴轻点缀",
+      "lines": [
+        {
+          "kind": "dialogue",
+          "speaker_id": "wen_heng",
+          "text": "伤成这样，还要逞强？我扶你回去。",
+          "source_anchor": "原文对白",
+          "emotion": "轻声温和",
+          "speech_rate": "缓慢"
+        },
+        {
+          "kind": "sfx_note",
+          "text": "雪落发间，衣袖轻微摩擦声"
+        }
+      ]
+    },
+    {
+      "shot_id": "s06",
+      "order": 5,
+      "duration_sec": 6,
+      "scene": {
+        "label": "雪径·艰难归途",
+        "location": "林间雪径至小屋",
+        "time_of_day": "dusk",
+        "mood": "艰辛、温暖",
+        "background_prompt": "雪深难行，月白与玄衣身影相依，玄衣人重量大半压在女子肩上，女子发顶绒雪，耳后薄红"
+      },
+      "visual": {
+        "shot_type": "medium",
+        "camera": "跟拍侧面全景",
+        "prompt_zh": "中景：温蘅（十九岁年轻女子，月白袄裙）用肩膀架着沈照夜（二十四岁青年男子，玄色劲装，受伤）臂弯艰难前行，雪深及踝，药篓斜挂温蘅身侧，两人呼出白气，玄衣与月白在雪光中相依，风雪漫天。只有这两人，没有第三个人",
+        "negative_prompt": "third person, extra person, crowd, old man, elderly, text, subtitle, watermark, deformed hands, blurry",
+        "characters_on_screen": [
+          "wen_heng",
+          "shen_zhaoye"
+        ]
+      },
+      "bgm_note": "钢琴轻缓，节奏沉稳，温暖中带紧迫",
+      "lines": [
+        {
+          "kind": "sfx_note",
+          "text": "踩雪咯吱声，呼吸白气，衣袍摩擦，两人步履沉重"
+        }
+      ]
+    },
+    {
+      "shot_id": "s07",
+      "order": 6,
+      "duration_sec": 6,
+      "scene": {
+        "label": "小屋·拔箭疗伤",
+        "location": "温蘅小屋",
+        "time_of_day": "night",
+        "mood": "专注、紧张",
+        "background_prompt": "中国古代小木屋室内，木质房梁，刷白土墙，简朴木榻，蜡烛油灯为唯一光源，烛火昏黄，无任何现代元素"
+      },
+      "visual": {
+        "shot_type": "medium_close_up",
+        "camera": "缓慢推进",
+        "prompt_zh": "中近景，古风木屋室内，烛火昏黄：温蘅（十九岁年轻女子，月白袄裙）跪于木榻旁，侧脸专注，手持金疮药与剪刀；沈照夜（二十四岁青年男子，玄色劲装）倚靠木榻枕头，右肩绑着白布绷带，神情隐忍。背景是古代木屋，只有这两人，没有第三人",
+        "negative_prompt": "modern room, modern furniture, glass window, electric light, tile floor, sofa, third person, extra person, old man, text, subtitle, watermark, deformed hands, blurry",
+        "characters_on_screen": [
+          "wen_heng",
+          "shen_zhaoye"
+        ]
+      },
+      "bgm_note": "弦乐低沉，烛火噼啪轻响",
+      "lines": [
+        {
+          "kind": "dialogue",
+          "speaker_id": "shen_zhaoye",
+          "text": "你叫什么？",
+          "source_anchor": "原文对白",
+          "emotion": "虚弱却清醒",
+          "speech_rate": "缓慢"
+        },
+        {
+          "kind": "dialogue",
+          "speaker_id": "wen_heng",
+          "text": "温蘅，蘅芜的蘅。",
+          "source_anchor": "原文对白",
+          "emotion": "平静专注",
+          "speech_rate": "正常"
+        },
+        {
+          "kind": "sfx_note",
+          "text": "布料剪裁细碎声，药粉洒落，烛火轻摇"
+        }
+      ]
+    },
+    {
+      "shot_id": "s08",
+      "order": 7,
+      "duration_sec": 5,
+      "scene": {
+        "label": "小屋·雪夜凝望",
+        "location": "温蘅小屋窗边",
+        "time_of_day": "night",
+        "mood": "沉静、余韵",
+        "background_prompt": "中国古代木屋室内，古风木格窗棂（不是玻璃窗），窗外雪花纷落夜色漆黑，屋内蜡烛为唯一光源，暖黄烛光，无任何现代元素"
+      },
+      "visual": {
+        "shot_type": "medium_close_up",
+        "camera": "侧面近景",
+        "prompt_zh": "中近景，古风木屋内，烛光暖黄：沈照夜（二十四岁青年男子，玄色劲装，腰束银丝绦）倚靠古代木格窗旁，烛光映出侧脸轮廓，右肩裹有白布绷带，他垂眸透过木格窗望向窗外大雪，神情罕见松弛。背景是古代木屋内景和木格窗，只有沈照夜一人",
+        "negative_prompt": "modern room, glass window, electric light bulb, modern furniture, sofa, tile, second person, extra person, woman, text, subtitle, watermark, deformed hands, blurry, extra fingers",
+        "characters_on_screen": [
+          "shen_zhaoye"
+        ]
+      },
+      "bgm_note": "钢琴轻收，余韵悠长，温暖而略带怅惘",
+      "lines": [
+        {
+          "kind": "sfx_note",
+          "text": "窗外风雪呼啸，屋内烛火轻晃，沈照夜呼吸渐稳"
+        }
+      ]
+    }
+  ]
+}

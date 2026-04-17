@@ -1,0 +1,29 @@
+{
+  "source_script": "D:\\wxjk\\toVedio\\artifacts\\exports\\snowy_arc_storyboard.json",
+  "style": "anime",
+  "views": [
+    "front",
+    "side",
+    "back"
+  ],
+  "characters": [
+    {
+      "id": "shen_zhaoye",
+      "name": "沈照夜",
+      "sheets": {
+        "front": "shen_zhaoye_costume_sheet.png",
+        "side": "shen_zhaoye_costume_sheet_side.png",
+        "back": "shen_zhaoye_costume_sheet_back.png"
+      }
+    },
+    {
+      "id": "wen_heng",
+      "name": "温蘅",
+      "sheets": {
+        "front": "wen_heng_costume_sheet.png",
+        "side": "wen_heng_costume_sheet_side.png",
+        "back": "wen_heng_costume_sheet_back.png"
+      }
+    }
+  ]
+}

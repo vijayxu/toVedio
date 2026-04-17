@@ -1,0 +1,236 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.toVedio/schema/storyboard-v1.json",
+  "title": "小说影视化分镜（MiniMax 结构化输出对齐 v1）",
+  "description": "由大模型根据小说原文生成分镜；对白须来自或忠实于小说原文，不擅自改剧情。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "meta", "characters", "shots"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "本文件格式版本，应用侧做兼容判断。"
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "language"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "短片标题（可从章节名或小说名派生）。"
+        },
+        "language": {
+          "type": "string",
+          "description": "主要语言，如 zh-CN。"
+        },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "novel_id": { "type": "string", "description": "可选，外部系统里的作品 ID。" },
+            "chapter": { "type": "string", "description": "可选，章节标识。" },
+            "excerpt_range": {
+              "type": "string",
+              "description": "可选，本成片覆盖的原作范围说明（如「第 1–2 段」）。"
+            }
+          }
+        },
+        "model": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "provider": { "type": "string", "const": "minimax" },
+            "model_name": { "type": "string", "description": "实际调用的 MiniMax 模型名。" }
+          }
+        }
+      }
+    },
+    "characters": {
+      "type": "array",
+      "description": "本成片涉及人物；用于保持造型与配音角色一致。",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "description": "机器可读 id，在 shots 里引用。"
+          },
+          "name": { "type": "string", "description": "人物名（与小说一致）。" },
+          "role": {
+            "type": "string",
+            "enum": ["protagonist", "supporting", "antagonist", "narrator", "extra", "unknown"],
+            "description": "叙事角色类型，可选。模型若输出 supporter 等同义词，校验前会归一为 supporting。"
+          },
+          "appearance": {
+            "type": "string",
+            "description": "外貌/服装稳定描述，供文生图角色一致性参考。"
+          },
+          "voice_hint": {
+            "type": "string",
+            "description": "可选，TTS 音色或 MiniMax 语音参数提示。"
+          }
+        }
+      }
+    },
+    "shots": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["shot_id", "order", "scene", "visual", "lines"],
+        "properties": {
+          "shot_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "description": "镜头唯一 id。"
+          },
+          "order": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "时间轴顺序，从 0 递增。"
+          },
+          "duration_sec": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "可选，建议镜头时长（秒）。"
+          },
+          "media_preference": {
+            "type": "string",
+            "enum": ["image", "video", "auto"],
+            "description": "可选；image=仅静图；video=优先图生视频（若开启 I2V）；auto=按全局步长/比例选取。"
+          },
+          "bgm_note": {
+            "type": "string",
+            "description": "可选，本镜 BGM 氛围描述，如「低沉弦乐，悬疑氛围」「轻快温馨的钢琴配乐」，供声音公式使用。"
+          },
+          "scene": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["label", "background_prompt"],
+            "properties": {
+              "label": {
+                "type": "string",
+                "description": "场景一句话标签，如「青石巷·夜」。"
+              },
+              "location": { "type": "string", "description": "可选，地点。" },
+              "time_of_day": {
+                "type": "string",
+                "enum": ["dawn", "day", "dusk", "night", "unknown"],
+                "description": "可选，时间。模型若输出 early_morning 等变体，校验前会归一（如 early_morning→dawn）。"
+              },
+              "mood": { "type": "string", "description": "可选，情绪氛围词。" },
+              "background_prompt": {
+                "type": "string",
+                "minLength": 1,
+                "description": "背景/环境画面提示（中文或中英混合），不含对白文字。"
+              }
+            }
+          },
+          "visual": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["shot_type", "prompt_zh"],
+            "properties": {
+              "shot_type": {
+                "type": "string",
+                "enum": [
+                  "establishing",
+                  "wide",
+                  "medium",
+                  "medium_close_up",
+                  "close_up",
+                  "extreme_close_up",
+                  "over_shoulder",
+                  "insert",
+                  "transition",
+                  "other"
+                ],
+                "description": "影视化景别/机位大类；仅可使用上述枚举值（含中近景 medium_close_up 等）。"
+              },
+              "camera": {
+                "type": "string",
+                "description": "可选，运镜说明，如「缓慢推近」「手持晃动」。"
+              },
+              "prompt_zh": {
+                "type": "string",
+                "minLength": 1,
+                "description": "本镜画面主提示（中文为主），含人物动作与构图，不要叠加大段对白文字。"
+              },
+              "prompt_en": {
+                "type": "string",
+                "description": "可选，给只认英文的文生图模型时使用。"
+              },
+              "negative_prompt": {
+                "type": "string",
+                "description": "可选，负向提示，如字幕、水印、畸形手指。"
+              },
+              "characters_on_screen": {
+                "type": "array",
+                "description": "本镜入画人物 id，引用 characters[].id。",
+                "items": { "type": "string" }
+              }
+            }
+          },
+          "lines": {
+            "type": "array",
+            "description": "本镜声音与台词；对白须来自小说原文对应片段。",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind", "text"],
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "enum": ["dialogue", "narration", "sfx_note"],
+                  "description": "dialogue=角色对白；narration=旁白/叙述（若采用原文叙述）；sfx_note=拟音/环境声文字说明。"
+                },
+                "speaker_id": {
+                  "type": "string",
+                  "description": "kind=dialogue 时必填，对应 characters[].id。"
+                },
+                "text": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "须与小说原文一致或为其忠实摘录，不篡改语义。"
+                },
+                "source_anchor": {
+                  "type": "string",
+                  "description": "可选，在原文中的定位说明，便于人工核对，如「第二段第三句」。"
+                },
+                "emotion": {
+                  "type": "string",
+                  "description": "可选，dialogue 行的情绪标签，如「平静」「紧张」「悲伤」「激动」「温柔」「愤怒」，供声音公式使用。"
+                },
+                "speech_rate": {
+                  "type": "string",
+                  "enum": ["急促", "缓慢", "正常"],
+                  "description": "可选，语速，仅 kind=dialogue 时有意义。"
+                },
+                "voice_note": {
+                  "type": "string",
+                  "description": "可选，音色补充备注，如「低沉」「清亮」「沙哑」，仅 kind=dialogue 时有意义。"
+                }
+              },
+              "allOf": [
+                {
+                  "if": {
+                    "properties": { "kind": { "const": "dialogue" } },
+                    "required": ["kind"]
+                  },
+                  "then": { "required": ["speaker_id"] }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

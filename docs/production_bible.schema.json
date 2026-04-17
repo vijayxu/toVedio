@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.toVedio/schema/production-bible-v1.json",
+  "title": "制作圣经（选角·定妆·搭景）",
+  "description": "由模型根据小说一次性生成并人工可编辑；成片生成时复用以锁定人物与场景，避免每次重跑都漂移。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "meta", "characters", "locations"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "language"],
+      "properties": {
+        "title": { "type": "string" },
+        "language": { "type": "string" },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "novel_excerpt": { "type": "string", "description": "可选，本圣经覆盖的原文摘要或范围说明。" }
+          }
+        },
+        "model": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "provider": { "type": "string" },
+            "model_name": { "type": "string" }
+          }
+        }
+      }
+    },
+    "series_visual_lock": {
+      "type": "string",
+      "description": "全片一条视觉锁定说明（时代、色相、摄影质感、禁忌）；生成视频时优先于程序默认锁定文案。"
+    },
+    "characters": {
+      "type": "array",
+      "minItems": 1,
+      "description": "选角与定妆：外观须稳定可复用，与分镜 characters 同构。",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "appearance"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "description": "分镜 shots 中 speaker_id / characters_on_screen 必须引用此 id。"
+          },
+          "name": { "type": "string" },
+          "role": {
+            "type": "string",
+            "enum": ["protagonist", "supporting", "antagonist", "narrator", "extra", "unknown"]
+          },
+          "appearance": {
+            "type": "string",
+            "minLength": 8,
+            "description": "定妆：发型/脸型/服装色系等稳定描述。"
+          },
+          "voice_hint": { "type": "string" }
+        }
+      }
+    },
+    "locations": {
+      "type": "array",
+      "minItems": 1,
+      "description": "搭景：主场景环境锚点，供每镜背景与陈设一致。",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "label", "environment_prompt"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "label": { "type": "string" },
+          "time_of_day": {
+            "type": "string",
+            "enum": ["dawn", "day", "dusk", "night", "unknown"]
+          },
+          "mood": { "type": "string" },
+          "environment_prompt": {
+            "type": "string",
+            "minLength": 8,
+            "description": "空间布局、材质、光线、时代感；不含具体剧情动作。"
+          }
+        }
+      }
+    }
+  }
+}

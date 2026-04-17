@@ -1,0 +1,6 @@
+# Python >= 3.10
+Pillow>=10.0.0,<12
+anthropic>=0.40.0,<1
+jsonschema>=4.20.0,<5
+python-dotenv>=1.0.0,<2
+# 项目依赖唯一来源（统一在仓库根目录安装）
