@@ -126,9 +126,9 @@
       },
       "visual": {
         "shot_type": "medium_close_up",
-        "camera": "对切正反打",
-        "prompt_zh": "中近景，画面中只有两个人：沈照夜（二十四岁青年男子，剑眉，玄色劲装，右肩血浸发黑）倚靠枯树，目光锐利，额角冷汗，撑着虚弱的笑；温蘅（十九岁年轻女子，月白袄裙，木簪，杏眼）蹲于雪地对视，药篓搁膝，眉间透出不忍。只有这两人，没有第三个人出现",
-        "negative_prompt": "third person, extra person, old man, elderly, aged, gray hair, crowd, text, subtitle, watermark, deformed hands",
+        "camera": "固定机位双人同框",
+        "prompt_zh": "中近景双人同框：沈照夜（二十四岁青年男子，玄色劲装，右肩血迹）倚靠枯树根坐于雪地，温蘅（十九岁年轻女子，月白袄裙，木簪）蹲在他旁边与他视线同高对望，两人相距约一臂，在画幅内人物高度相近、比例一致，没有一大一小的透视差。只有这两人，没有第三人",
+        "negative_prompt": "size difference, disproportionate characters, one person larger than other, perspective distortion, third person, extra person, old man, elderly, aged, gray hair, crowd, text, subtitle, watermark, deformed hands",
         "characters_on_screen": [
           "shen_zhaoye",
           "wen_heng"

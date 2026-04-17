@@ -482,38 +482,38 @@ def _chain_tail_motion_prefix(shot: dict) -> str:
 
 
 def _series_visual_lock(*, style: str, novel_text: str) -> str:
-    “””
-    全片统一视觉圣经：缓解每镜独立生成导致的”像不同视频拼在一起”。
-    “””
-    first = “”
+    """
+    全片统一视觉圣经：缓解每镜独立生成导致的"像不同视频拼在一起"。
+    """
+    first = ""
     for line in novel_text.strip().splitlines():
         t = line.strip()
         if t:
             first = t[:140]
             break
     era_lock = (
-        “时代锁定：本片为中国古代（明清风格）写实场景，”
-        “室内场景必须是古风木构建筑（木梁、土墙或刷白墙、木榻、油灯/蜡烛），”
-        “严禁出现任何现代元素（玻璃窗、灯泡、电器、现代家具、瓷砖、现代门窗）；”
-        “室外场景为山林雪地，不得出现现代建筑或公路。”
+        "时代锁定：本片为中国古代（明清风格）写实场景，"
+        "室内场景必须是古风木构建筑（木梁、土墙或刷白墙、木榻、油灯/蜡烛），"
+        "严禁出现任何现代元素（玻璃窗、灯泡、电器、现代家具、瓷砖、现代门窗）；"
+        "室外场景为山林雪地，不得出现现代建筑或公路。"
     )
-    if style == “anime”:
+    if style == "anime":
         lock = (
-            “全片视觉锁定：这是同一支连续短片的多个镜头，不是混剪合集；”
-            “线稿风格、上色方式、光影逻辑、色相倾向必须全程一致；”
-            “禁止中途从平面二次元变成三渲二或写实 CG；”
-            “禁止每段换一套完全不同的调色或时代感。”
+            "全片视觉锁定：这是同一支连续短片的多个镜头，不是混剪合集；"
+            "线稿风格、上色方式、光影逻辑、色相倾向必须全程一致；"
+            "禁止中途从平面二次元变成三渲二或写实 CG；"
+            "禁止每段换一套完全不同的调色或时代感。"
         )
     else:
         lock = (
-            “全片视觉锁定：这是同一支连续短片的多个镜头，不是混剪合集；”
-            “摄影质感、对比度、颗粒与调色倾向必须全程一致；”
-            “禁止中途像切换到另一支广告片或另一部电影的美术；”
-            “灯光逻辑（主光方向、冷暖比）在相邻镜头应可衔接。”
+            "全片视觉锁定：这是同一支连续短片的多个镜头，不是混剪合集；"
+            "摄影质感、对比度、颗粒与调色倾向必须全程一致；"
+            "禁止中途像切换到另一支广告片或另一部电影的美术；"
+            "灯光逻辑（主光方向、冷暖比）在相邻镜头应可衔接。"
         )
     if first:
-        return f”{era_lock}{lock}故事锚点（全片沿用同一世界观与氛围）：{first}”
-    return f”{era_lock}{lock}”
+        return f"{era_lock}{lock}故事锚点（全片沿用同一世界观与氛围）：{first}"
+    return f"{era_lock}{lock}"
 
 
 _XFADE_BATCH_SIZE = 6  # 超过此值时分批递归合并，避免超长滤镜链
@@ -1284,14 +1284,14 @@ def _build_story_chain_hint(prev_shot: dict | None, curr_shot: dict, next_shot: 
     next_text = _shot_lines_text(next_shot)[:90]
     if prev_text and next_text:
         return (
-            f"叙事链：承接上一镜“{prev_text}”，本镜聚焦“{curr_text}”，"
-            f"并为下一镜“{next_text}”建立明确动作因果。"
+            f"叙事链：承接上一镜[{prev_text}]，本镜聚焦[{curr_text}]，"
+            f"并为下一镜[{next_text}]建立明确动作因果。"
         )
     if next_text:
-        return f"叙事链：本镜聚焦“{curr_text}”，并自然引出下一镜“{next_text}”。"
+        return f"叙事链：本镜聚焦[{curr_text}]，并自然引出下一镜[{next_text}]。"
     if prev_text:
-        return f"叙事链：承接上一镜“{prev_text}”，完成当前事件“{curr_text}”的结果落点。"
-    return f"叙事链：作为开场建立镜头，清楚交代当前事件“{curr_text}”的起点。"
+        return f"叙事链：承接上一镜[{prev_text}]，完成当前事件[{curr_text}]的结果落点。"
+    return f"叙事链：作为开场建立镜头，清楚交代当前事件[{curr_text}]的起点。"
 
 
 def _phase_for_pos(i: int, total: int) -> str:
@@ -1320,7 +1320,7 @@ def _story_beat_label(phase: str, idx: int) -> str:
 def _build_story_beats_from_shots(shots: list[dict], *, max_beats: int = 8) -> tuple[list[dict], list[int]]:
     """
     基于 shots 生成稳定 story beats（阶段化事件链），并返回每个 shot 对应的 beat 索引。
-    这是“结构层”：让后续每镜生成不再是孤立任务。
+    这是"结构层"：让后续每镜生成不再是孤立任务。
     """
     n = len(shots)
     if n == 0:
@@ -1939,10 +1939,12 @@ def _l2v_collect_cached_segments(
     fingerprint: str,
     nsh: int,
     base_durations: list[float],
+    *,
+    ignore_fingerprint: bool = False,
 ) -> tuple[dict[int, Path], list[float]] | None:
     """
     按镜头粒度收集可复用缓存：
-    - manifest 指纹匹配且 n_shots 一致
+    - manifest 指纹匹配且 n_shots 一致（ignore_fingerprint=True 时跳过指纹校验）
     - seg_XXXX.mp4 存在且可读的镜头将被复用（不要求从 0 连续）
     返回 ({index: tmp_seg_path}, shot_durations_from_manifest_or_base)。
     """
@@ -1953,7 +1955,12 @@ def _l2v_collect_cached_segments(
         man = json.loads(man_path.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError):
         return None
-    if man.get("fingerprint") != fingerprint or int(man.get("n_shots", -1)) != nsh:
+    if ignore_fingerprint:
+        if int(man.get("n_shots", -1)) != nsh:
+            logger.warning("--ignore-fingerprint：缓存 n_shots=%s 与当前 %d 不符，跳过缓存。", man.get("n_shots"), nsh)
+            return None
+        logger.info("--ignore-fingerprint：跳过指纹校验，直接复用现有 seg 文件。")
+    elif man.get("fingerprint") != fingerprint or int(man.get("n_shots", -1)) != nsh:
         return None
     raw_durs = man.get("shot_durations")
     if not isinstance(raw_durs, list) or len(raw_durs) != nsh:
@@ -2015,6 +2022,7 @@ def run_l2v_prepared_storyboard(
     character_sheet_dir: Path | None = None,
     l2v_resume: bool = True,
     compress_shots: bool = True,
+    ignore_fingerprint: bool = False,
 ) -> None:
     """分镜 JSON 已就绪时：配图、百炼 L2V、拼接、可选 TTS。默认按 -o 成片路径旁 {stem}.l2v_cache 断点续跑。
     有定妆目录且含 costume_sheet PNG 时强制关闭尾帧链式，避免脸漂（见 _resolve_l2v_chain_flag）。
@@ -2067,7 +2075,7 @@ def run_l2v_prepared_storyboard(
         character_sheet_dir=sheet_root,
     )
     cache_dir = _l2v_output_cache_dir(output_mp4)
-    if l2v_resume:
+    if l2v_resume and not ignore_fingerprint:
         mp = cache_dir / "manifest.json"
         if mp.is_file():
             try:
@@ -2094,7 +2102,8 @@ def run_l2v_prepared_storyboard(
         cached_segments: dict[int, Path] = {}
         if l2v_resume:
             resumed = _l2v_collect_cached_segments(
-                cache_dir, tmp, fingerprint, nsh, shot_durations
+                cache_dir, tmp, fingerprint, nsh, shot_durations,
+                ignore_fingerprint=ignore_fingerprint,
             )
             if resumed is not None:
                 cached_segments, shot_durations = resumed
@@ -2272,29 +2281,34 @@ def run_l2v_prepared_storyboard(
                         raise
         else:
             # ------ 非链式：三路并发 ------ #
-            # 有定妆图的镜头走 R2V（直接参考生视频，跳过 T2I）；
-            # 无定妆图的镜头走两阶段：T2I → I2V。
+            # 有定妆图的镜头 → R2V（wan2.6-r2v，一步到位）
+            # 无角色的空镜  → T2V（wan2.6-t2v，直接文生视频，跳过 T2I）
+            # 有角色但无定妆图（降级）→ T2I → I2V（两步）
             import time as _time
-            from .video_t2v_bailian_kling import submit_r2v_task
+            from .video_t2v_bailian_kling import submit_r2v_task, create_t2v_task
 
             needs = [i for i in range(nsh) if i not in cached_segments]
 
-            # 按是否有定妆图分流
+            # 三路分流
             needs_r2v: list[int] = []
-            needs_t2i: list[int] = []
-            shot_ref_paths: dict[int, list[Any]] = {}  # i → ref_paths（仅 r2v 镜头）
+            needs_t2v: list[int] = []   # 空镜：characters_on_screen 为空
+            needs_t2i: list[int] = []   # 有角色但无定妆图（降级）
+            shot_ref_paths: dict[int, list[Any]] = {}
             for i in needs:
                 _, _, _, ref_paths, _ = _build_shot_prompts(i, None)
+                on_screen = [str(x).strip() for x in ((shots[i].get("visual") or {}).get("characters_on_screen") or []) if str(x).strip()]
                 if ref_paths:
                     needs_r2v.append(i)
                     shot_ref_paths[i] = ref_paths
+                elif not on_screen:
+                    needs_t2v.append(i)
                 else:
                     needs_t2i.append(i)
 
-            if needs_r2v:
-                logger.info("非链式并发：%d 镜有定妆图 → R2V，%d 镜无定妆图 → T2I+I2V", len(needs_r2v), len(needs_t2i))
-            else:
-                logger.info("非链式并发模式：批量提交 %d 个 T2I 任务…", len(needs_t2i))
+            logger.info(
+                "非链式并发：%d 镜有定妆图 → R2V，%d 镜空镜 → T2V，%d 镜有角色无定妆 → T2I+I2V",
+                len(needs_r2v), len(needs_t2v), len(needs_t2i),
+            )
 
             # --- R2V 并发提交 ---
             r2v_task_ids: dict[int, str] = {}
@@ -2313,17 +2327,30 @@ def run_l2v_prepared_storyboard(
                     raise RuntimeError(f"镜头 {i+1} R2V 任务提交失败：{e}") from e
                 _time.sleep(0.2)
 
-            # --- T2I 同步下载（账号不支持异步 T2I；R2V 已并发提交，此处同步等待不影响整体并发）---
+            # --- T2V 并发提交（空镜，跳过 T2I） ---
+            t2v_task_ids: dict[int, str] = {}
+            for i in needs_t2v:
+                img_prompt, _mood, motion, _ref_paths, _po = _build_shot_prompts(i, None)
+                from .storyboard_render import shot_to_sound_description as _sound_desc
+                sound = _sound_desc(shots[i], characters=chars)
+                t2v_prompt = f"{img_prompt}。{motion}" + (f"。{sound}" if sound else "")
+                dur = shot_durations[i]
+                dur_hint = max(1, min(dur_cap, int(round(dur))))
+                try:
+                    tid = create_t2v_task(t2v_prompt, duration_sec=dur_hint)
+                    t2v_task_ids[i] = tid
+                    logger.info("镜头 %d/%d：T2V 任务已提交（空镜）task_id=%s", i + 1, nsh, tid[:12])
+                except RuntimeError as e:
+                    raise RuntimeError(f"镜头 {i+1} T2V 任务提交失败：{e}") from e
+                _time.sleep(0.2)
+
+            # --- T2I 同步下载（有角色但无定妆图的降级路径）---
             keyframe_pngs: dict[int, Path] = {}
             for i in needs_t2i:
-                img_prompt, mood_seed, _motion, ref_paths, prompt_override = _build_shot_prompts(i, None)
+                img_prompt, mood_seed, _motion, _ref_paths, _po = _build_shot_prompts(i, None)
                 png = frames / f"shot_{i:04d}.png"
-                logger.info("镜头 %d/%d：T2I 同步生成关键帧…", i + 1, nsh)
+                logger.info("镜头 %d/%d：T2I 同步生成关键帧（有角色但无定妆图）…", i + 1, nsh)
                 shot_neg = str((shots[i].get("visual") or {}).get("negative_prompt") or "")
-                # 空镜追加强力 negative
-                on_screen = (shots[i].get("visual") or {}).get("characters_on_screen") or []
-                if not on_screen:
-                    shot_neg = ("people, person, human, figure, man, woman, " + shot_neg).strip(", ")
                 try:
                     from .illustration import download_illustration_from_prompt as _dl_t2i
                     _dl_t2i(img_prompt, mood_seed, png, scene_index=i, strict_illustration=True,
@@ -2332,7 +2359,7 @@ def run_l2v_prepared_storyboard(
                 except RuntimeError as e:
                     raise RuntimeError(f"镜头 {i+1} T2I 失败：{e}") from e
 
-            # --- 并发轮询 R2V（15s 间隔） ---
+            # --- 并发轮询 R2V ---
             raw_videos: dict[int, Path] = {}
             pending_r2v = set(r2v_task_ids.keys())
             while pending_r2v:
@@ -2347,7 +2374,21 @@ def run_l2v_prepared_storyboard(
                 if pending_r2v:
                     _time.sleep(15.0)
 
-            # --- 并发提交 I2V（T2I 路径）---
+            # --- 并发轮询 T2V（空镜）---
+            pending_t2v = set(t2v_task_ids.keys())
+            while pending_t2v:
+                for i in list(pending_t2v):
+                    raw_t2v = tmp / f"l2v_raw_{i:04d}.mp4"
+                    try:
+                        poll_video_task_to_file(t2v_task_ids[i], raw_t2v, label=f"T2V空镜{i+1}/{nsh}")
+                        raw_videos[i] = raw_t2v
+                        pending_t2v.discard(i)
+                    except RuntimeError as e:
+                        raise RuntimeError(f"镜头 {i+1} T2V 失败：{e}") from e
+                if pending_t2v:
+                    _time.sleep(15.0)
+
+            # --- 并发提交 I2V（有角色无定妆图降级路径）---
             i2v_task_ids: dict[int, str] = {}
             for i in needs_t2i:
                 png = keyframe_pngs[i]
@@ -2362,7 +2403,7 @@ def run_l2v_prepared_storyboard(
                     raise RuntimeError(f"镜头 {i+1} I2V 任务提交失败：{e}") from e
                 _time.sleep(0.2)
 
-            # --- 并发轮询 I2V（15s 间隔） ---
+            # --- 并发轮询 I2V ---
             pending_i2v = set(i2v_task_ids.keys())
             while pending_i2v:
                 for i in list(pending_i2v):
@@ -2424,6 +2465,7 @@ def run_from_storyboard_json(
     production_bible_path: Path | None = None,
     character_sheet_dir: Path | None = None,
     l2v_resume: bool = True,
+    ignore_fingerprint: bool = False,
 ) -> None:
     """从已有分镜/剧本 JSON 直接跑 L2V 成片（不再调用小说生成分镜）。"""
     from .production_bible_io import apply_production_bible_to_storyboard, load_production_bible
@@ -2457,6 +2499,7 @@ def run_from_storyboard_json(
         character_sheet_dir=character_sheet_dir,
         l2v_resume=l2v_resume,
         compress_shots=False,
+        ignore_fingerprint=ignore_fingerprint,
     )
 
 

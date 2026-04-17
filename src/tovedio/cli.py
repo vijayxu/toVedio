@@ -259,6 +259,11 @@ def main() -> int:
         help="仅重跑指定镜头（1-based，逗号分隔，如 1,3），其余镜头仍尽量复用缓存（需未关闭 l2v-resume）",
     )
     parser.add_argument(
+        "--ignore-fingerprint",
+        action="store_true",
+        help="跳过缓存指纹校验，直接复用现有 seg 文件（分镜 JSON 修改后仍能续跑，配合 --rerun-shots 使用）",
+    )
+    parser.add_argument(
         "--self-check",
         action="store_true",
         help="执行双模式环境自检（Python/ffmpeg/ffprobe/供应商密钥），不渲染视频",
@@ -610,10 +615,8 @@ def main() -> int:
                     production_bible_path=args.production_bible,
                     character_sheet_dir=args.character_sheet_dir,
                     l2v_resume=(not args.no_l2v_resume),
+                    ignore_fingerprint=args.ignore_fingerprint,
                 )
-        except ValueError as e:
-            print(f"错误：{e}", file=sys.stderr)
-            return 1
         except RuntimeError as e:
             print(f"错误：{e}", file=sys.stderr)
             return 1
@@ -675,9 +678,8 @@ def main() -> int:
                 production_bible_path=args.production_bible,
                 character_sheet_dir=args.character_sheet_dir,
                 l2v_resume=(not args.no_l2v_resume),
+                ignore_fingerprint=args.ignore_fingerprint,
             )
-    except ValueError as e:
-        print(f"错误：{e}", file=sys.stderr)
         return 1
     except RuntimeError as e:
         print(f"错误：{e}", file=sys.stderr)
